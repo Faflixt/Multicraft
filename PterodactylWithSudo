@@ -1,0 +1,51 @@
+#!/bin/bash
+#Can be grabbed from
+#wget https://bit.ly/2X6sZVU && bash 2X6sZVU
+echo 'Enter your FQDN panel.example.com'
+sudo read fqdn
+sudo apt update
+sudo apt upgrade -y 
+sudo apt install curl vim -y
+sudo #curl https://raw.githubusercontent.com/MrFlacko/Scripts/master/UbuntuMirrors18.04 > /etc/apt/sources.list
+sudo bash <(curl -s https://raw.githubusercontent.com/MrFlacko/pterodactyl-installer/master/oldpanelinstall.sh)
+sudo bash <(curl -s https://raw.githubusercontent.com/VilhelmPrytz/pterodactyl-installer/master/install-daemon.sh)
+sudo apt update
+sudo apt upgrade -y
+sudo apt install ufw -y
+sudo ufw allow 443
+sudo ufw allow 80
+sudo ufw allow 22
+sudo ufw allow 2022
+sudo ufw allow 8080
+sudo ufw allow 25565
+sudo echo y | ufw delete 7
+sudo echo y | ufw delete 7
+sudo echo y | ufw delete 7
+sudo echo y | ufw delete 7
+sudo echo y | ufw delete 7
+sudo echo y | ufw delete 7
+sudo ufw enable
+sudo apt install certbot
+sudo echo 'Certbot running'
+sudo echo 'Select create temporary website to configure'
+sudo certbot certonly -d $fqdn
+sudo systemctl restart nginx
+sudo echo done
+sudo echo cd /srv/daemon, copy core.json from the website to the config folder when creating the node
+sudo echo then do npm start
+#echo 'Press Enter to do final setup'
+#read tmp
+#clear
+#echo 'Please set sftp enabled to false'
+#echo 'refer to this site if you don't know to set the enabled flag to false'
+#echo 'https://pterodactyl.io/daemon/standalone_sftp.html#run-the-standalone-server'
+#echo
+#echo 'Press enter when ready'
+sudo #read 
+sudo #nano /srv/daemon/config/core.json
+sudo #cd /srv/daemon
+sudo #curl -Lo sftp-server https://github.com/pterodactyl/sftp-server/releases/download/v1.0.4/sftp-server
+sudo #chmod +x sftp-server
+sudo #./sftp-server
+sudo #curl https://raw.githubusercontent.com/MrFlacko/Scripts/master/PterodactylStandaloneSFTP > /etc/systemd/system/pterosftp.service
+sudo #systemctl enable --now pterosftp
